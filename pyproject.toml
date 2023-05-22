@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "ultical-to-ics"
+version = "0.1.0"
+description = ""
+authors = ["Nils Bauer <nils.bauer@posteo.de>"]
+readme = "README.md"
+packages = [{include = "ultical_to_ics"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+requests = "^2.28.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
