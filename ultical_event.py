@@ -74,11 +74,7 @@ class UlticalEvent:
         self.website = data.get('Website')
         self.youtube_url = data.get('YoutubeUrl')
         self.registration_url = data.get('RegistrationUrl')
-        # self.created_by_user = data.get('CreatedByUser')
         self.file_name = data.get('FileName')
-        # self.filter_type = data.get('FilterType')
-        # self.filter_id = data.get('FilterId')
-        # self.filter = data.get('Filter')
         self.divisions = list(
             map(divisions_enum.get, data.get('Filter').get('Division') if data.get('Filter').get('Division') else []))
         self.levels = list(
@@ -102,15 +98,18 @@ class UlticalEvent:
         e.organizer = self.organizer
         e.geo = Geo(self.latitude, self.longitude)
         e.location = f'{self.country}, {self.city}'
-        e.description = self.description
+        description_header = '\n'.join(list(itertools.chain.from_iterable([self.levels, self.divisions, self.field_types, self.team_formats])))
+        e.description = f'{description_header}\n\n{self.description}'
         e.url = self.registration_url
         e.categories = list(itertools.chain.from_iterable([self.levels, self.divisions, self.field_types,
                                                            self.team_formats]))
         e.make_all_day()
         return e
 
-    def __str__(self):
-        return f"UlticalEvent: {self.name} ({self.start_date} - {self.end_date})"
 
-    def __repr__(self):
-        return f"UlticatEvent(name='{self.name}', start_date='{self.start_date}', end_date='{self.end_date}')"
+def __str__(self):
+    return f"UlticalEvent: {self.name} ({self.start_date} - {self.end_date})"
+
+
+def __repr__(self):
+    return f"UlticatEvent(name='{self.name}', start_date='{self.start_date}', end_date='{self.end_date}')"
