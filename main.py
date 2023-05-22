@@ -16,9 +16,6 @@ if __name__ == '__main__':
     ultical_events = []
     for event in event_list:
         e = Event()
-
-        #e.name = event.get('Name')
-        # e.make_all_day()
         r2 = requests.get('https://api.ultical.com/api/v1/event/' + str(event.get('Id')))
         event_details = r2.json()
         ultical_event = UlticalEvent(event_details)
