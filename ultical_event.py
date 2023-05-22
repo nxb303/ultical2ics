@@ -1,11 +1,6 @@
 from ics import Event, Geo
 import itertools
 
-
-def flatten(list_to_be_flattened):
-    return [item for sublist in list_to_be_flattened for item in sublist]
-
-
 divisions_enum = {
     1: 'Mixed',
     2: 'Open',
@@ -98,7 +93,8 @@ class UlticalEvent:
         e.organizer = self.organizer
         e.geo = Geo(self.latitude, self.longitude)
         e.location = f'{self.country}, {self.city}'
-        description_header = '\n'.join(list(itertools.chain.from_iterable([self.levels, self.divisions, self.field_types, self.team_formats])))
+        description_header = '\n'.join(
+            list(itertools.chain.from_iterable([self.levels, self.divisions, self.field_types, self.team_formats])))
         e.description = f'{description_header}\n\n{self.description}'
         e.url = self.registration_url
         e.categories = list(itertools.chain.from_iterable([self.levels, self.divisions, self.field_types,
